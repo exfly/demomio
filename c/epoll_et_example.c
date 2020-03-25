@@ -19,7 +19,7 @@ int main()
         return 1;
     }
 
-    event.events = EPOLLIN;
+    event.events = EPOLLIN | EPOLLET;
     event.data.fd = 0;
 
     if (epoll_ctl(epoll_fd, EPOLL_CTL_ADD, 0, &event))
@@ -37,11 +37,17 @@ int main()
         for (i = 0; i < event_count; i++)
         {
             printf("Reading file descriptor '%d' -- ", events[i].data.fd);
-            bytes_read = read(events[i].data.fd, read_buffer, READ_SIZE);
-            printf("%zd bytes read.\n", bytes_read);
-            read_buffer[bytes_read] = '\0';
-            printf("Read '%s'\n", read_buffer);
-
+            while (1)
+            {
+                bytes_read = read(events[i].data.fd, read_buffer, READ_SIZE);
+                printf("%zd bytes read.\n", bytes_read);
+                read_buffer[bytes_read] = '\0';
+                printf("Read '%s'\n", read_buffer);
+                if (bytes_read == 0)
+                {
+                    break;
+                }
+            }
             if (!strncmp(read_buffer, "stop\n", 5))
                 running = 0;
         }
