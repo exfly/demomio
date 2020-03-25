@@ -1,7 +1,12 @@
-build: echoman
+CC = gcc
+
+all: epoll_example
+ 
+epoll_example: epoll_example.c
+	$(CC) -Wall -Werror -o $@ epoll_example.c
 
 echoman:
-	-@gcc echoman.c -o echoman -Werror -g
+	$(CC) echoman.c -o echoman -Werror -g
 
 clean:
-	-@rm echoman
+	@rm -v echoman epoll_example
