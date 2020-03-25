@@ -2,6 +2,8 @@
 
 # references
 
+- https://blog.lucode.net/linux/epoll-tutorial.html
+- https://github.com/millken/c-example/blob/master/epoll-example.c
 - https://www.suchprogramming.com/epoll-in-3-easy-steps/
 - https://medium.com/@copyconstruct/the-method-to-epolls-madness-d9d2d6378642
 - https://github.com/angrave/SystemProgramming/wiki/Networking,-Part-7:-Nonblocking-I-O,-select(),-and-epoll
