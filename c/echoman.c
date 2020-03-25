@@ -184,7 +184,7 @@ int main(int argc, char *argv[])
                             break;
                         }
                         /* 输出到stdout */
-                        s = write(1, buf, count);
+                        s = write(STDOUT_FILENO, buf, count);
                         if (s == -1)
                         {
                             perror("write");
