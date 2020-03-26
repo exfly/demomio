@@ -37,7 +37,7 @@ int main()
         for (i = 0; i < event_count; i++)
         {
             printf("Reading file descriptor '%d' -- ", events[i].data.fd);
-            while (1)
+            while (running)
             {
                 bytes_read = read(events[i].data.fd, read_buffer, READ_SIZE);
                 printf("%zd bytes read.\n", bytes_read);
@@ -47,9 +47,11 @@ int main()
                 {
                     break;
                 }
+                if (!strncmp(read_buffer, "stop\n", 5))
+                {
+                    running = 0;
+                }
             }
-            if (!strncmp(read_buffer, "stop\n", 5))
-                running = 0;
         }
     }
 
